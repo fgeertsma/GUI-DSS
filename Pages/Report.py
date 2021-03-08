@@ -1,11 +1,12 @@
 import tkinter as tk
 from Pages.FTP import *
 from tkcalendar import Calendar, DateEntry
+import babel.numbers
 import os
 import Commander
 from datetime import datetime
 from datetime import date
-
+import Params
 
 class Report_Window(tk.Frame):
     def __init__(self, master=None):
@@ -104,13 +105,14 @@ class Report_Window(tk.Frame):
         else:
             TimeSpan += "'"
 
-        file = "out.pdf"
+        filename = TimeSpan + ".pdf"
         Dashboard = "oBjEVCPGz"
         API = "eyJrIjoieUNXNzdZZDB4aFV5MklkRFF3MDVFaTZHOTE1cEtqWVEiLCJuIjoiS2V5IiwiaWQiOjF9"
-        IP = "192.168.180.20:3000"
+        IP = Params.IP + ':' + Params.Report_Port
+
         output = str(Commander.main(  COMMAND_PATH="/home/smst/go/bin/",
                                       COMMAND_NAME="grafana-reporter",
-                                      ARGUMENTS="-cmd_enable=1 -cmd_apiKey " + API + " -ip " + IP + " -cmd_dashboard " + Dashboard + " -cmd_ts " + TimeSpan + " -cmd_o " + file,
+                                      ARGUMENTS="-cmd_enable=1 -cmd_apiKey " + Params.API_KEY + " -ip " + IP + " -cmd_dashboard " + Dashboard + " -cmd_ts " + TimeSpan + " -cmd_o " + filename,
                                       SUDO=True))
         print(output)
         #os.system("Report_Script " + start_date + " " + start_time + " " + end_date + " " + end_time)

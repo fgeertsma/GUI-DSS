@@ -83,7 +83,7 @@ class FTP_Window(tk.Frame):
                                                                         command=command,
                                                                         arguments=(self.arguments + (btns[x].cget("text") + '/')),
                                                                         sudo=sudo))),
-                                                                 self.update()]))
+                                                                        self.update()]))
 
             if (btn_nr % 4) == 0:
                 line = 0

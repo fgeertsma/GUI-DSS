@@ -25,18 +25,27 @@ class MainScreen(tk.Frame):
         w = tk.Label(self, text="Main Screen")
         w.pack()
 
+        self.field = tk.Frame(self, bg="DarkBlue", borderwidth=2)
+        line = 0
+        row = 0
         self.btn_nr = 0
         self.btns = []
 
         for x in range(0, len(Windows)):
-                self.btns.append(tk.Button(self,    bg=Collour[self.btn_nr],
-                                                    width=20, height=6,
-                                                    text=Windows[self.btn_nr], font='Helvetica 12 bold',
-                                                    command=lambda x=self.btn_nr: [ self.destroy(),
-                                                                                    self.action(x)]))
+                self.btns.append(tk.Button(self.field,  bg=Collour[self.btn_nr],
+                                                        width=20, height=6,
+                                                        text=Windows[self.btn_nr], font='Helvetica 12 bold',
+                                                        command=lambda x=self.btn_nr: [ self.destroy(),
+                                                                                        self.action(x)]))
 
-                self.btns[self.btn_nr].pack()
+                if (self.btn_nr % 3) == 0:
+                    line = 0
+                    row += 1
+
+                line += 1
+                self.btns[self.btn_nr].grid(row=line, column=row)
                 self.btn_nr += 1
+                self.field.pack()
 
 
     def action(self, button):

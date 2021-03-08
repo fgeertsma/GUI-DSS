@@ -2,13 +2,12 @@
 import os
 import subprocess
 import re
+import Params
 
-Password = 'sm20st07'
-Hostname = 'smst@192.168.180.20'
+Hostname = Params.User + '@' + Params.IP
 
 def list(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
-    Command = "pscp " + " -pw " + Password + " -P 22 " "-ls " + Hostname + ":" + DEST_FILE_PATH + DEST_FILE_NAME
-
+    Command = "pscp " + " -pw " + Params.Password + " -P 22 " "-ls " + Hostname + ":" + DEST_FILE_PATH + DEST_FILE_NAME
 
     try:
         Output = str(subprocess.check_output(Command, shell=True))
@@ -23,7 +22,7 @@ def list(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
 
 
 def copy(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
-    Command = "pscp " + "-r " + "-P " + "22 " + "-pw " + Password + " " + Hostname + ":" + \
+    Command = "pscp " + "-r " + "-P " + "22 " + "-pw " + Params.Password + " " + Hostname + ":" + \
                DEST_FILE_PATH + DEST_FILE_NAME + " " + SOURCE_FILE_PATH + SOURCE_FILE_NAME
 
     try:
@@ -39,7 +38,7 @@ def copy(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
 
 
 def paste(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
-    Command = "pscp " + "-r " + "-P " + "22 " + "-pw " + Password + " " + SOURCE_FILE_PATH + SOURCE_FILE_NAME + " " + \
+    Command = "pscp " + "-r " + "-P " + "22 " + "-pw " + Params.Password + " " + SOURCE_FILE_PATH + SOURCE_FILE_NAME + " " + \
                                                          Hostname + ":" + DEST_FILE_PATH + DEST_FILE_NAME
     Progress = True
 

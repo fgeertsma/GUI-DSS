@@ -5,9 +5,9 @@ import os
 import File_Transfer
 import json
 import requests
+import Params
 
-HOST = 'http://192.168.180.20'
-API_KEY = "eyJrIjoieUNXNzdZZDB4aFV5MklkRFF3MDVFaTZHOTE1cEtqWVEiLCJuIjoiS2V5IiwiaWQiOjF9"
+HOST = "http://" + Params.IP
 DIR = 'exported-dashboards/'
 
 class Dashboard_Window(tk.Frame):
@@ -34,7 +34,7 @@ class Dashboard_Window(tk.Frame):
     def Dashboard_Import(self):
         headers = {"Accept": "application/json",
                    "Content-Type": "application/json",
-                   'Authorization': 'Bearer %s' % (API_KEY)}
+                   'Authorization': 'Bearer %s' % (Params.API_KEY)}
 
         filename = filedialog.askopenfilename(initialdir=DIR, title="Select file",
                                               filetypes=(("json files", "*.json"),
@@ -53,7 +53,7 @@ class Dashboard_Window(tk.Frame):
 
 
     def Dashboard_Export(self):
-        headers = {'Authorization': 'Bearer %s' % (API_KEY,)}
+        headers = {'Authorization': 'Bearer %s' % (Params.API_KEY,)}
         response = requests.get('%s/api/search?query=&' % (HOST,), headers=headers)
         response.raise_for_status()
         dashboards = response.json()

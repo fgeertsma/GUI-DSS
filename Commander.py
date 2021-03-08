@@ -1,12 +1,11 @@
 #!/usr/bin/python
 import os
 import subprocess
+import Params
 
-Password = 'sm20st07'
-Hostname = 'smst@192.168.180.20'
+Hostname = Params.User + '@' + Params.IP
 
 def main(COMMAND_PATH, COMMAND_NAME, ARGUMENTS, SUDO):
-
 
     if (COMMAND_PATH == None):
         COMMAND_PATH = ""
@@ -17,9 +16,9 @@ def main(COMMAND_PATH, COMMAND_NAME, ARGUMENTS, SUDO):
     Command = str(COMMAND_PATH) + str(COMMAND_NAME) + " " + str(ARGUMENTS)
 
     if (SUDO == True):
-        Command= ("echo -e " + Password + " | sudo -S -i && sudo " + Command)
+        Command= ("echo -e " + Params.Password + " | sudo -S -i && sudo " + Command)
 
-    Command = "plink " + "-batch " + "-ssh " + Hostname + " -t -pw " + Password + ' "' + Command + '"'
+    Command = "plink " + "-batch " + "-ssh " + Hostname + " -t -pw " + Params.Password + ' "' + Command + '"'
     print(Command)
     try:
         Output = str(subprocess.check_output(Command, shell=True))

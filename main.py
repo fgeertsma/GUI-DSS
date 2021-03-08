@@ -1,4 +1,3 @@
-#from Main_Window import *
 from Multi import *
 
 root = tk.Tk()
