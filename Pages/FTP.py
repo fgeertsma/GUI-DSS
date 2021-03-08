@@ -34,7 +34,12 @@ class FTP_Window(tk.Frame):
     def FTP(self, path, command, arguments, sudo):
         print(arguments)
         self.arguments = arguments
-        output = str(Commander.main(COMMAND_PATH=path,COMMAND_NAME=command, ARGUMENTS=arguments, SUDO=sudo))
+
+
+        output = str(Commander.main(COMMAND_PATH=path,
+                                    COMMAND_NAME=command,
+                                    ARGUMENTS=arguments,
+                                    SUDO=sudo))
 
         if output.find("[sudo] password for smst: ")!= -1:
             output = output.split("[sudo] password for smst:", 2)[1]
@@ -69,8 +74,8 @@ class FTP_Window(tk.Frame):
         line = 0
         row = 0
         self.Length = len(string)
-        for x in range((self.Length) -1):   #Remove the last string: '
-            btns.append(tk.Button(self.Dir, bg=self.check(string[x]),
+        for x in range(self.Length):
+            btns.append(tk.Button(self.Dir, bg='Grey',
                                        width=11, height=4,
                                        text=string[x], font='Helvetica 7 bold',
                                        command=lambda x=btn_nr: [self.Set_Label(str(self.FTP(
@@ -88,21 +93,3 @@ class FTP_Window(tk.Frame):
             line += 1
             self.Dir.pack()
 
-    def check(self, String):
-        # path = "false"
-        # command = "find"
-        # arg = '"-e '
-        # arg += String
-        # arg += ' && echo file exists || echo file"'
-        # sudo = "true"
-        # #print("Command_Script " + command + " " + arg + " " + sudo)
-        #
-        # os.system("Command_Script " + path + " " + command + " " + arg + " " + sudo)
-        #
-        # output = open('C:/command/file.txt', "r")
-        # # os.remove('C:/command/file.txt')
-        # f = output.read()
-        # if f.find("[sudo] password for smst: ")!= -1:
-        #     f = f.split("[sudo] password for smst:", 2)[1]
-        # print(f)
-        return 'Grey'

@@ -1,15 +1,16 @@
 import tkinter as tk
 import os
+import Commander
 
 class Command_Window(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)  # ADDED parent argument.
         self.master.title("Restore Window")
 
-        path = "false"
+        path = ""
         command = "ls"
-        arguments = '"/home/smst/ -a"'
-        sudo = "true"
+        arguments = "/home/smst/ -a"
+        sudo = True
 
         def Set_Label(string):
             output.insert(1.0, string)
@@ -32,14 +33,14 @@ class Command_Window(tk.Frame):
         self.mainloop()
 
     def command(self, path, command, arguments, sudo):
-        os.system("Command_Script " + path + " " + command + " " + arguments + " " + sudo)
 
-        output = open('C:/command/file.txt', "r")
-        #os.remove('C:/command/file.txt')
-        f = output.read()
-        #print(f)
-        if f.find("[sudo] password for smst: ")!= -1:
-            f = f.split("[sudo] password for smst:", 2)[1]
+        output = str(Commander.main(COMMAND_PATH=path,
+                                    COMMAND_NAME=command,
+                                    ARGUMENTS=arguments,
+                                    SUDO=sudo))
 
-        return f
+        if output.find("[sudo] password for smst: ")!= -1:
+            output = output.split("[sudo] password for smst:", 2)[1]
+
+        return output
 

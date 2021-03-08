@@ -2,18 +2,21 @@ from Pages.Backup import *
 from Pages.Report import *
 from Pages.Restore import *
 from Pages.Command import *
+from Pages.Dashboard import *
 
 Windows = ["Backup_Window",
            "Report_Window",
            "Restore_Window",
            "Command_Window",
-           "FTP_Window"]
+           "FTP_Window",
+           "Dashboard_Window"]
 
 Collour = ['Blue',
            'Red',
            'Yellow',
            'Green',
-           'Purple']
+           'Purple',
+           'Cyan']
 
 class MainScreen(tk.Frame):
     def __init__(self, master=None):

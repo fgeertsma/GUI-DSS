@@ -2,6 +2,9 @@ import tkinter as tk
 from Pages.FTP import *
 from tkcalendar import Calendar, DateEntry
 import os
+import Commander
+from datetime import datetime
+from datetime import date
 
 
 class Report_Window(tk.Frame):
@@ -60,13 +63,54 @@ class Report_Window(tk.Frame):
         self.mainloop()
 
 
-    def report(self, start_date, s_time, end_date, e_time):
-        start_time = str(s_time) + ":00:00"
-        #if s_time < 10:
+    def report(self, start_date, start_time, end_date, end_time):
+        #start_time = str(start_time) + ":00:00"
+        #if start_time < 10:
             #start_time = "0" + start_time
 
-        end_time = str(e_time) + ":00:00"
+        #end_time = str(end_time) + ":00:00"
         #if e_time < 10:
            # end_time = "0" + end_time
 
-        os.system("Report_Script " + start_date + " " + start_time + " " + end_date + " " + end_time)
+        start_date = date(int(start_date[0:4]), int(start_date[6:7]), int(start_date[9:10]))
+        end_date = date(int(end_date[0:4]), int(end_date[6:7]), int(end_date[9:10]))
+
+        now = str(datetime.now())
+        now_time = now[11:16]
+
+        now_date = date(int(now[0:4]), int(now[6:7]), int(now[9:10]))
+
+        start_time_delta = str(int(now_time[0:2]) - start_time) + ":" + str(int(now_time[3:5]))
+        end_time_delta = str(int(now_time[0:2]) - end_time) + ":" + str(int(now_time[3:5]))
+
+        start_date_delta = str(now_date - start_date)
+        start_date_delta = start_date_delta.split("0:00:00", 2)[0]
+        start_date_delta = start_date_delta.split("days,", 2)[0]
+        end_date_delta = str(now_date - end_date)
+        end_date_delta = end_date_delta.split("0:00:00", 2)[0]
+        end_date_delta = end_date_delta.split("days,", 2)[0]
+
+
+
+
+        start = str(start_date_delta)[:-1] + 'd'
+
+        end = str(end_date_delta)[:-1]
+
+        TimeSpan = "'from=now-" + start
+        TimeSpan += "&to=now"
+        if (end != ""):
+            TimeSpan += "-"  + end + 'd' +"'"
+        else:
+            TimeSpan += "'"
+
+        file = "out.pdf"
+        Dashboard = "oBjEVCPGz"
+        API = "eyJrIjoieUNXNzdZZDB4aFV5MklkRFF3MDVFaTZHOTE1cEtqWVEiLCJuIjoiS2V5IiwiaWQiOjF9"
+        IP = "192.168.180.20:3000"
+        output = str(Commander.main(  COMMAND_PATH="/home/smst/go/bin/",
+                                      COMMAND_NAME="grafana-reporter",
+                                      ARGUMENTS="-cmd_enable=1 -cmd_apiKey " + API + " -ip " + IP + " -cmd_dashboard " + Dashboard + " -cmd_ts " + TimeSpan + " -cmd_o " + file,
+                                      SUDO=True))
+        print(output)
+        #os.system("Report_Script " + start_date + " " + start_time + " " + end_date + " " + end_time)

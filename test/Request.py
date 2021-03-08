@@ -1,4 +1,3 @@
-import requests
 
 headers = {"Accept": "application/json","Content-Type": "application/json" ,"Authorization": "Bearer eyJrIjoiQm5GWVg2ZmRRbjJQZFhmb1RkeHI3d3RUd3FvVEFTUXMiLCJuIjoiaW5maW5pdCIsImlkIjoxfQ=="}
 

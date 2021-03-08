@@ -2,6 +2,7 @@ import tkinter as tk
 from Pages.FTP import *
 from tkinter import filedialog
 import os
+import File_Transfer
 
 class Restore_Window(tk.Frame):
     def __init__(self, parent=None):
@@ -26,4 +27,30 @@ class Restore_Window(tk.Frame):
         file = filename[length-17:length]
         path = filename[0:length-len(file)]
 
-        os.system("Restore_Script " + path + " " + file)
+        output = str(File_Transfer.paste( SOURCE_FILE_PATH=path,
+                                          SOURCE_FILE_NAME=file,
+                                          DEST_FILE_PATH="/home/smst/",
+                                          DEST_FILE_NAME=""))
+        #print(output)
+
+        output = str(Commander.main(COMMAND_PATH="/home/smst/",
+                                    COMMAND_NAME="Restore_Backup_DB",
+                                    ARGUMENTS="-p " + "/home/smst/ " + "-n " + file,
+                                    SUDO=True))
+        #print(output)
+
+        output = str(Commander.main(COMMAND_PATH="/home/smst/",
+                                    COMMAND_NAME="Switch_DB",
+                                    ARGUMENTS="-n " + file,
+                                    SUDO=True))
+
+        #print(output)
+
+        output = str(Commander.main(COMMAND_PATH="",  # make Backup
+                                    COMMAND_NAME="rm",
+                                    ARGUMENTS="-r " + "/home/smst/influxdb/share/" + file,
+                                    SUDO=True))
+
+        #print(output)
+
+        #os.system("Restore_Script " + path + " " + file)

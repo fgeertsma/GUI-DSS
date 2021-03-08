@@ -11,4 +11,3 @@ python "%~f0" %*
 exit /b 0
 '''
 
-print("python code")
