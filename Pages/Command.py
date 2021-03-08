@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 import Commander
+import Global
 
 class Command_Window(tk.Frame):
     def __init__(self, parent=None):
@@ -21,16 +22,23 @@ class Command_Window(tk.Frame):
         Command_Button = tk.Button(self,    text="Command",
                                             command=lambda: Set_Label(str(self.command(path, command, arguments, sudo))))
 
+        Leave_Button = tk.Button(self, text="Quit",
+                          command=lambda:          self.close())
+
+
         output = tk.Text(self.master)
         output.pack()
 
-
-
+        Leave_Button.pack()
         Instruct_Label.pack()
         Command_Button.pack()
 
     def start(self):
         self.mainloop()
+
+    def close(self):
+        Global.Close_State = False
+        self.master.destroy()
 
     def command(self, path, command, arguments, sudo):
 

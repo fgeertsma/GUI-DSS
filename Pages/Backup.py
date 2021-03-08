@@ -4,6 +4,7 @@ import tkinter as tk
 import os
 import Commander
 import File_Transfer
+import Global
 
 class Backup_Window(tk.Frame):
     def __init__(self, master=None):
@@ -13,8 +14,9 @@ class Backup_Window(tk.Frame):
         Instruct_Label = tk.Label(self, text='Choose date')
 
 
-        #Leave_Button = tk.Button(self, text="Quit",
-        #                  command=lambda: self.master.destroy())
+        Leave_Button = tk.Button(self, text="Quit",
+                          command=lambda:          self.close())
+
 
         Backup_Button = tk.Button(self, text="Backup",
                                   command=lambda: self.backup(start_date=str(Start_Date_Calander.get()), start_time=(Start_Time_Slider.get()),
@@ -45,6 +47,8 @@ class Backup_Window(tk.Frame):
 
 #----------------------------Packing------------------------------------------------------------------------------------
 
+        Leave_Button.pack()
+
         Start_Frame.pack(side=tk.LEFT, anchor=tk.N)
         Start_Label.pack()
         Start_Date_Calander.pack(side=tk.BOTTOM)
@@ -62,6 +66,10 @@ class Backup_Window(tk.Frame):
 
     def start(self):
         self.mainloop()
+
+    def close(self):
+        Global.Close_State = False
+        self.master.destroy()
 
     def backup(self, start_date, start_time, end_date, end_time):
         if(start_time < 10):

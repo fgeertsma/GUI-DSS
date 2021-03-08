@@ -6,6 +6,7 @@ import File_Transfer
 import json
 import requests
 import Params
+import Global
 
 HOST = "http://" + Params.IP
 DIR = 'exported-dashboards/'
@@ -23,6 +24,10 @@ class Dashboard_Window(tk.Frame):
         Dashboard_Import_Button = tk.Button(self, text="Dashboard Import",
                                             command=lambda: self.Dashboard_Import())
 
+        Leave_Button = tk.Button(self, text="Quit",
+                          command=lambda:          self.close())
+
+        Leave_Button.pack()
         Instruct_Label.pack()
         Dashboard_Import_Button.pack()
         Dashboard_Export_Button.pack()
@@ -30,6 +35,10 @@ class Dashboard_Window(tk.Frame):
 
     def start(self):
         self.mainloop()
+
+    def close(self):
+        Global.Close_State = False
+        self.master.destroy()
 
     def Dashboard_Import(self):
         headers = {"Accept": "application/json",

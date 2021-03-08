@@ -5,6 +5,7 @@ import os
 import subprocess
 import Commander
 import re
+import Global
 
 path = ""
 command = "ls"
@@ -25,11 +26,19 @@ class FTP_Window(tk.Frame):
         FTP_Button = tk.Button(self, text="Command",
                                    command=lambda: self.Set_Label(str(self.FTP(path, command, arguments, sudo))))
 
+        Leave_Button = tk.Button(self, text="Quit",
+                          command=lambda:          self.close())
+
+        Leave_Button.pack()
         Instruct_Label.pack()
         FTP_Button.pack()
 
     def start(self):
         self.mainloop()
+
+    def close(self):
+        Global.Close_State = False
+        self.master.destroy()
 
     def FTP(self, path, command, arguments, sudo):
         print(arguments)

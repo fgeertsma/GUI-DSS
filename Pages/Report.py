@@ -6,6 +6,7 @@ import Commander
 from datetime import datetime
 from datetime import date
 import Params
+import Global
 
 class Report_Window(tk.Frame):
     def __init__(self, master=None):
@@ -18,7 +19,8 @@ class Report_Window(tk.Frame):
         Report_Button = tk.Button(self, text="Report",
                                   command=lambda: self.report(Start_Date_Calander.get(), Start_Time_Slider.get(),
                                                               End_Date_Calander.get(), End_Time_Slider.get()))
-
+        Leave_Button = tk.Button(self, text="Quit",
+                          command=lambda:          self.close())
 #----------------------------Start-Date--------------------------------------------------------------------------------
 
         Start_Frame = tk.Frame(self, bg="DarkBlue", borderwidth=2)
@@ -43,6 +45,7 @@ class Report_Window(tk.Frame):
         End_Time_Slider = tk.Scale(End_Frame, from_=0, to=23, orient=tk.HORIZONTAL)
 
 #----------------------------Packing------------------------------------------------------------------------------------
+        Leave_Button.pack()
 
         Start_Frame.pack(side=tk.LEFT, anchor=tk.N)
         Start_Label.pack()
@@ -62,6 +65,9 @@ class Report_Window(tk.Frame):
     def start(self):
         self.mainloop()
 
+    def close(self):
+        Global.Close_State = False
+        self.master.destroy()
 
     def report(self, start_date, start_time, end_date, end_time):
         #start_time = str(start_time) + ":00:00"
