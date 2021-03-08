@@ -108,7 +108,7 @@ class Report_Window(tk.Frame):
         filename = TimeSpan + ".pdf"
         Dashboard = "oBjEVCPGz"
         API = "eyJrIjoieUNXNzdZZDB4aFV5MklkRFF3MDVFaTZHOTE1cEtqWVEiLCJuIjoiS2V5IiwiaWQiOjF9"
-        IP = Params.IP + ':' + Params.Report_Port
+        IP = Params.IP + ':' + str(Params.Report_Port)
 
         output = str(Commander.main(  COMMAND_PATH="/home/smst/go/bin/",
                                       COMMAND_NAME="grafana-reporter",

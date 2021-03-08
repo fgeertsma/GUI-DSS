@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/exported-dashboards/Alarm_Panel2.json
+/exported-dashboards/DSS_PC.json
+/exported-dashboards/DSS_PC_Advanced.json
