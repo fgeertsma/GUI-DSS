@@ -1,4 +1,4 @@
-from Multi import *
+from Main_Screen import *
 
 root = tk.Tk()
 myWindow = MainScreen(master=root)

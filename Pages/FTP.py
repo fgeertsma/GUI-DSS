@@ -1,5 +1,5 @@
 #from Main_Window import *
-from Multi import *
+from Main_Screen import *
 import tkinter as tk
 import os
 import subprocess

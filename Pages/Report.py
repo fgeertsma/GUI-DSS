@@ -1,7 +1,6 @@
 import tkinter as tk
 from Pages.FTP import *
 from tkcalendar import Calendar, DateEntry
-import babel.numbers
 import os
 import Commander
 from datetime import datetime
