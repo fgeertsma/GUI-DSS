@@ -7,8 +7,9 @@ from datetime import datetime
 from datetime import date
 import Params
 import Global
+import File_Transfer
 
-class Report_Window(tk.Frame):
+class ReportWindow(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)  # ADDED parent argument.
 
@@ -110,7 +111,8 @@ class Report_Window(tk.Frame):
         else:
             TimeSpan += "'"
 
-        filename = TimeSpan + ".pdf"
+        filename = str(start_date) + ".pdf"
+        filename = filename.replace('-', '')
         Dashboard = "oBjEVCPGz"
         API = "eyJrIjoieUNXNzdZZDB4aFV5MklkRFF3MDVFaTZHOTE1cEtqWVEiLCJuIjoiS2V5IiwiaWQiOjF9"
         IP = Params.IP + ':' + str(Params.Report_Port)
@@ -119,5 +121,24 @@ class Report_Window(tk.Frame):
                                       COMMAND_NAME="grafana-reporter",
                                       ARGUMENTS="-cmd_enable=1 -cmd_apiKey " + Params.API_KEY + " -ip " + IP + " -cmd_dashboard " + Dashboard + " -cmd_ts " + TimeSpan + " -cmd_o " + filename,
                                       SUDO=True))
+        print(output)
+
+        if (os.path.exists("report/")) == False:
+            os.mkdir("report/")
+
+        output = File_Transfer.copy( DEST_FILE_PATH="/home/smst/",
+                                     DEST_FILE_NAME=filename,
+                                     SOURCE_FILE_PATH="report/",
+                                     SOURCE_FILE_NAME="",
+                                     arg="")
+        print(output)
+
+
+        output = str(Commander.main(COMMAND_PATH="",  # make Backup
+                                    COMMAND_NAME="rm",
+                                    ARGUMENTS="/home/smst/" + filename,
+                                    SUDO=True))
+
+
         print(output)
         #os.system("Report_Script " + start_date + " " + start_time + " " + end_date + " " + end_time)

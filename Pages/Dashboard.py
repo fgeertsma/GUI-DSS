@@ -11,7 +11,7 @@ import Global
 HOST = "http://" + Params.IP
 DIR = 'exported-dashboards/'
 
-class Dashboard_Window(tk.Frame):
+class DashboardWindow(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)  # ADDED parent argument.
         self.master.title("Dashboard Window")

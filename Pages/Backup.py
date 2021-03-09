@@ -6,7 +6,7 @@ import Commander
 import File_Transfer
 import Global
 
-class Backup_Window(tk.Frame):
+class BackupWindow(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)  # ADDED parent argument.
         self.master.title("Backup Window")
@@ -92,10 +92,14 @@ class Backup_Window(tk.Frame):
         Count = output.find("meta.00")
         Name = output[Count-18: Count-1]
 
+        if (os.path.exists("backup/")) == False:
+            os.mkdir("backup/")
+
         output = File_Transfer.copy( DEST_FILE_PATH="/home/smst/influxdb/share/",
-                                    DEST_FILE_NAME=Name,
-                                    SOURCE_FILE_PATH="C:/backup/",
-                                    SOURCE_FILE_NAME="")
+                                     DEST_FILE_NAME=Name,
+                                     SOURCE_FILE_PATH="backup/",
+                                     SOURCE_FILE_NAME="",
+                                     arg="-r ")
 
         #print(output)
 

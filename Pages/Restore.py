@@ -1,27 +1,26 @@
 import tkinter as tk
-from Pages.FTP import *
 from tkinter import filedialog
-import os
 import File_Transfer
 import Commander
 import Global
 
-class Restore_Window(tk.Frame):
+
+class RestoreWindow(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)  # ADDED parent argument.
         self.master.title("Restore Window")
 
-        Instruct_Label = tk.Label(self, text='Select Backup Folder')
+        instruct_label = tk.Label(self, text='Select Backup Folder')
 
-        Restore_Button = tk.Button(self, text="Restore",
+        restore_button = tk.Button(self, text="Restore",
                           command=lambda: self.restore())
 
-        Leave_Button = tk.Button(self, text="Quit",
+        leave_button = tk.Button(self, text="Quit",
                           command=lambda:          self.close())
 
-        Leave_Button.pack()
-        Instruct_Label.pack()
-        Restore_Button.pack()
+        leave_button.pack()
+        instruct_label.pack()
+        restore_button.pack()
 
 
     def start(self):
@@ -33,7 +32,7 @@ class Restore_Window(tk.Frame):
 
     def restore(self):
         filename = filedialog.askdirectory()  # show an "Open" dialog box and return the path to the selected file
-        length=len(filename)
+        length = len(filename)
         file = filename[length-17:length]
         path = filename[0:length-len(file)]
 

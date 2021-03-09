@@ -3,7 +3,7 @@ import os
 import Commander
 import Global
 
-class Command_Window(tk.Frame):
+class CommandWindow(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)  # ADDED parent argument.
         self.master.title("Restore Window")

@@ -21,8 +21,8 @@ def list(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
     return (Output)
 
 
-def copy(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME):
-    Command = "pscp " + "-r " + "-P " + "22 " + "-pw " + Params.Password + " " + Hostname + ":" + \
+def copy(DEST_FILE_PATH, DEST_FILE_NAME, SOURCE_FILE_PATH, SOURCE_FILE_NAME, arg):
+    Command = "pscp " + arg + "-P " + "22 " + "-pw " + Params.Password + " " + Hostname + ":" + \
                DEST_FILE_PATH + DEST_FILE_NAME + " " + SOURCE_FILE_PATH + SOURCE_FILE_NAME
 
     try:

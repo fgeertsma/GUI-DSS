@@ -12,7 +12,7 @@ command = "ls"
 arguments = "/"
 sudo = True
 
-class FTP_Window(tk.Frame):
+class FileTransferWindow(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)  # ADDED parent argument.
         self.master.title("Restore Window")

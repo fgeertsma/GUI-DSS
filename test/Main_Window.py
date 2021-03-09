@@ -6,11 +6,11 @@ class MainScreen(tk.Frame):
     def __init__(self, parent=None):
         tk.Frame.__init__(self, parent)
 
-        nextWin1 = Backup_Window()
+        nextWin1 = BackupWindow()
         nextWin2 = Window_2()
-        nextWin3 = Restore_Window()
-        nextWin4 = Command_Window()
-        nextWin5 = FTP_Window()
+        nextWin3 = RestoreWindow()
+        nextWin4 = CommandWindow()
+        nextWin5 = FileTransferWindow()
 
         screen1 = tk.Button(self, text="Screen1",
                             command=lambda: [self.destroy(),
